@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.filters import FrequencyFilter
-from src.spectral import SpectralAnalyzer
+from src.signal_processing import (
+    FrequencyFilter,
+    SpectralAnalyzer,
+)
 
 x = np.linspace(0, 100, 512)
 

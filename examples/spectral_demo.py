@@ -1,8 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from src.spectral import SpectralAnalyzer
-
+from src.signal_processing import SpectralAnalyzer
 x = np.linspace(
     0,
     100,
