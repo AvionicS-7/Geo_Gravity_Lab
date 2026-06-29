@@ -6,6 +6,7 @@ Professional Computational Gravity Modelling Toolkit
 
 from .models import Body
 from .models import GeologicalModel
+from .evaluation import Evaluation
 
 from .forward_model import ForwardModel
 
@@ -24,4 +25,5 @@ __all__ = [
     "NoiseSimulator",
     "SpectralAnalyzer",
     "FrequencyFilter",
+    "Evaluation",
 ]
