@@ -52,7 +52,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def plot_gravity(
@@ -79,7 +79,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def compare_gravity(
@@ -117,7 +117,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def plot_residual(
@@ -143,7 +143,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def plot_convergence(
@@ -168,7 +168,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def compare_models(
@@ -214,7 +214,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
 
     @staticmethod
     def compare_all_methods(
@@ -265,7 +265,7 @@ class GravityVisualizer:
 
         plt.tight_layout()
 
-        plt.show()
+        return plt.gcf()
     @staticmethod
     def save_current_figure(filename: str):
 
@@ -350,4 +350,5 @@ class GravityVisualizer:
         plt.colorbar()
 
         plt.tight_layout()
+        return plt.gcf()
         

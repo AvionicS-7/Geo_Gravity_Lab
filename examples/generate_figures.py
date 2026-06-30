@@ -19,7 +19,7 @@ from src.pipeline import GravityPipeline
 from src.visualization import GravityVisualizer
 
 
-FIGURE_DIR = "reports/figures"
+FIGURE_DIR = "docs/figures"
 
 
 def ensure_directory():
@@ -27,15 +27,15 @@ def ensure_directory():
     os.makedirs(FIGURE_DIR, exist_ok=True)
 
 
-def save(name):
+def save(fig, name):
 
-    plt.savefig(
+    fig.savefig(
         os.path.join(FIGURE_DIR, name),
         dpi=300,
         bbox_inches="tight",
     )
 
-    plt.close()
+    plt.close(fig)
 
 
 def main():
@@ -101,24 +101,25 @@ def main():
     # Density Model
     # --------------------------------------------
 
-    GravityVisualizer.plot_density_model(
-        density,
-        title="Density Model",
+    fig = GravityVisualizer.plot_density_model(
+    density,
+    title="Density Model",
     )
 
-    save("01_density_model.png")
+    save(fig, "01_density_model.png")
+
 
     # --------------------------------------------
     # Gravity
     # --------------------------------------------
 
-    GravityVisualizer.plot_gravity(
-        x_obs,
-        gravity,
-        title="Gravity Anomaly",
+    fig = GravityVisualizer.plot_gravity(
+    x_obs,
+    gravity,
+    title="Gravity Anomaly",
     )
 
-    save("02_gravity.png")
+    save(fig, "02_gravity.png")
 
     # --------------------------------------------
     # FFT
@@ -139,44 +140,44 @@ def main():
 
     plt.ylabel("Amplitude")
 
-    save("03_fft.png")
+    fig = plt.gcf()
+    save(fig, "03_fft.png")
 
     # --------------------------------------------
     # Filtered Signal
     # --------------------------------------------
 
-    GravityVisualizer.compare_gravity(
-        x_obs,
-        gravity_noisy,
-        filtered,
+    fig = GravityVisualizer.compare_gravity(
+    x_obs,
+    gravity_noisy,
+    filtered,
     )
 
-    save("04_filtered.png")
+    save(fig, "04_filtered.png")
 
     # --------------------------------------------
     # Inversion Comparison
     # --------------------------------------------
 
-    GravityVisualizer.compare_all_methods(
-        density,
-        tik.reshape(density.shape),
-        depth_model.reshape(density.shape),
-        irls.reshape(density.shape),
+    fig = GravityVisualizer.compare_all_methods(
+    density,
+    tik.reshape(density.shape),
+    depth_model.reshape(density.shape),
+    irls.reshape(density.shape),
     )
 
-    save("05_inversion_comparison.png")
-
+    save(fig, "05_inversion_comparison.png")
     # --------------------------------------------
     # Convergence (Dummy if unavailable)
     # --------------------------------------------
 
     if "irls_rmse" in pipeline.results:
 
-        GravityVisualizer.plot_convergence(
+        fig = GravityVisualizer.plot_convergence(
             pipeline.results["irls_rmse"]
         )
 
-        save("06_convergence.png")
+        save(fig, "06_convergence.png")
 
     print()
 
