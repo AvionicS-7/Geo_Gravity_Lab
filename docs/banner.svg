@@ -1,0 +1,56 @@
+
+---
+
+# 3️⃣ docs/banner.svg
+
+Create this file.
+
+```svg
+<svg width="1600" height="400"
+xmlns="http://www.w3.org/2000/svg">
+
+<rect
+width="1600"
+height="400"
+fill="#0F172A"/>
+
+<text
+x="800"
+y="120"
+font-size="70"
+font-family="Arial"
+fill="white"
+text-anchor="middle"
+font-weight="bold">
+
+GeoGravityLab
+
+</text>
+
+<text
+x="800"
+y="200"
+font-size="34"
+font-family="Arial"
+fill="#60A5FA"
+text-anchor="middle">
+
+2D Gravity Forward Modelling &
+Scientific Inversion Framework
+
+</text>
+
+<text
+x="800"
+y="300"
+font-size="24"
+font-family="Arial"
+fill="#CBD5E1"
+text-anchor="middle">
+
+Forward Modelling • FFT • Signal Processing •
+Tikhonov • Depth Weighting • IRLS
+
+</text>
+
+</svg>

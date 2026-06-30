@@ -72,14 +72,13 @@ class IRLSInversion(BaseInversion):
         # Warm Start using Tikhonov
         # -------------------------------------------------
 
-        warm = TikhonovInversion(
-            lam=0.05
+        lambda_warm = 0.05 * np.max(np.diag(GTG))
+        m_cur = np.linalg.solve(
+            GTG + lambda_warm * np.diag(w_depth),
+            GTd,
         )
 
-        m_cur = warm.fit(
-            G,
-            d,
-        )
+        
 
         rmse_prev = None
 
@@ -91,17 +90,27 @@ class IRLSInversion(BaseInversion):
 
         for it in range(self.n_iter):
 
-            w_compact = (
-                1.0
-                / np.sqrt(
-                    m_cur**2
-                    + self.epsilon**2
-                )
+            # Compactness weights (Last & Kubik style)
+
+            w_compact = 1.0 / np.sqrt(
+                m_cur**2 + self.epsilon**2
             )
 
-            w_total = (
-                w_depth
-                * w_compact
+            # Prevent excessively large weights
+            w_compact = np.clip(
+                w_compact,
+                0.1,
+                20.0,
+            )
+
+            print(
+                "Compact weights:",
+                np.min(w_compact),
+                np.max(w_compact)
+            )
+
+            w_total = np.sqrt(
+                w_depth * w_compact
             )
 
             A = (

@@ -203,14 +203,19 @@ class GravityPipeline:
     def invert_irls(
     self,
     depth,
+    beta=0.5,
     ):
+
+        reference_depth = np.max(depth)
+
+        w_depth = (reference_depth / depth) ** beta
 
         solver = IRLSInversion()
 
         model = solver.fit(
             self.forward.G,
             self.results["filtered"],
-            depth,
+            w_depth,
         )
 
         self.results["irls"] = model

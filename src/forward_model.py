@@ -103,26 +103,31 @@ class ForwardModel:
 
         for i, xo in enumerate(x_obs):
 
+            dx_obs = x_flat - xo
+
+            dz_obs = z_flat - z_obs
+
             r2 = (
-                (x_flat - xo) ** 2
-                + (z_flat - z_obs) ** 2
+                dx_obs**2
+                + dz_obs**2
                 + regularization
             )
 
-            G[i, :] = (
-                (
-                    2.0
-                    * GRAVITATIONAL_CONSTANT
-                    * dx
-                    * dz
-                    * z_flat
-                )
-                / r2
-            ) * SI_TO_MICROGAL * 1000.0
+            kernel = (
+                2.0
+                * GRAVITATIONAL_CONSTANT
+                * dx
+                * dz
+                * dz_obs
+            ) / r2
+            
+            G[i, :] = kernel * SI_TO_MICROGAL
 
         self.G = G
 
         return G
+    
+    
 
     def forward(
         self,

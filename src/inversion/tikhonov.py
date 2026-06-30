@@ -51,8 +51,10 @@ class TikhonovInversion(BaseInversion):
             GTG.shape[0]
         )
 
+        lambda_ = self.lam * np.max(np.diag(GTG))     # scale λ to the system, matching the notebook
+
         self.model = np.linalg.solve(
-            GTG + self.lam**2 * I,
+            GTG + lambda_ * I,
             G.T @ d,
         )
 

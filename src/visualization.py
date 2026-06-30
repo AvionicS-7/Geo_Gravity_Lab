@@ -266,3 +266,88 @@ class GravityVisualizer:
         plt.tight_layout()
 
         plt.show()
+    @staticmethod
+    def save_current_figure(filename: str):
+
+        plt.savefig(
+            filename,
+            dpi=300,
+            bbox_inches="tight",
+        )
+
+        print(
+            f"Saved {filename}"
+        )
+
+        plt.close()
+    @staticmethod
+    def comparison_dashboard(
+        true_model,
+        gravity,
+        tik,
+        depth,
+        irls,
+    ):
+
+        fig = plt.figure(
+            figsize=(16,10)
+        )
+
+        plt.subplot(231)
+
+        plt.imshow(
+            true_model,
+            aspect="auto",
+            cmap="viridis",
+        )
+
+        plt.title("True Model")
+
+        plt.colorbar()
+
+        plt.subplot(232)
+
+        plt.plot(gravity)
+
+        plt.grid(True)
+
+        plt.title("Gravity")
+
+        plt.subplot(234)
+
+        plt.imshow(
+            tik,
+            aspect="auto",
+            cmap="viridis",
+        )
+
+        plt.title("Tikhonov")
+
+        plt.colorbar()
+
+        plt.subplot(235)
+
+        plt.imshow(
+            depth,
+            aspect="auto",
+            cmap="viridis",
+        )
+
+        plt.title("Depth Weighted")
+
+        plt.colorbar()
+
+        plt.subplot(236)
+
+        plt.imshow(
+            irls,
+            aspect="auto",
+            cmap="viridis",
+        )
+
+        plt.title("IRLS")
+
+        plt.colorbar()
+
+        plt.tight_layout()
+        
